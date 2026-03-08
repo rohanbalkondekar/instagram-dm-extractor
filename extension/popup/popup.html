@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=320">
+  <title>Instagram DM Extractor</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Instagram DM Extractor</h1>
+
+    <div id="status-area">
+      <div id="not-dm" class="status-msg hidden">
+        Navigate to an Instagram DM conversation first.
+      </div>
+
+      <div id="ready" class="hidden">
+        <div id="thread-info" class="thread-info"></div>
+        <div class="date-filter">
+          <select id="date-range-select" class="date-select">
+            <option value="all">All messages</option>
+            <option value="1">Past 1 day</option>
+            <option value="7">Past 7 days</option>
+            <option value="30">Past 30 days</option>
+            <option value="custom">Custom range</option>
+          </select>
+          <div id="custom-date-range" class="custom-date-range hidden">
+            <div class="date-input-row">
+              <label for="date-start">From:</label>
+              <input type="date" id="date-start" class="date-input">
+            </div>
+            <div class="date-input-row">
+              <label for="date-end">To:</label>
+              <input type="date" id="date-end" class="date-input">
+            </div>
+          </div>
+        </div>
+        <button id="extract-btn" class="btn primary">Extract Messages</button>
+      </div>
+
+      <div id="extracting" class="hidden">
+        <div id="thread-info-extracting" class="thread-info"></div>
+        <div class="progress-bar-container">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div id="progress-text" class="progress-text">Starting...</div>
+      </div>
+
+      <div id="complete" class="hidden">
+        <div id="thread-info-complete" class="thread-info"></div>
+        <div id="complete-text" class="complete-text"></div>
+        <div id="stats-section" class="stats-section hidden">
+          <div id="stats-header" class="stats-header">
+            <span>Stats</span>
+            <span id="stats-chevron" class="chevron">&#9660;</span>
+          </div>
+          <div id="stats-body" class="stats-body">
+            <div class="stats-row">
+              <span class="stats-label">Duration:</span>
+              <span id="stats-duration" class="stats-value"></span>
+            </div>
+            <div class="stats-row">
+              <span class="stats-label">Date range:</span>
+              <span id="stats-date-range" class="stats-value"></span>
+            </div>
+            <div class="stats-row">
+              <span class="stats-label">Avg/day:</span>
+              <span id="stats-avg-day" class="stats-value"></span>
+            </div>
+
+            <div class="stats-sub-header">Messages per sender</div>
+            <div id="stats-per-sender"></div>
+
+            <div class="stats-sub-header">Conversation initiations</div>
+            <div id="stats-initiations"></div>
+
+            <div class="stats-sub-header">Avg response time</div>
+            <div id="stats-response-time"></div>
+
+            <div class="stats-sub-header">Message types</div>
+            <div id="stats-types"></div>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button id="download-json" class="btn">Download JSON</button>
+          <button id="download-md" class="btn">Download MD</button>
+        </div>
+        <button id="extract-again" class="btn secondary">Extract Again</button>
+      </div>
+
+      <div id="error" class="hidden">
+        <div id="error-text" class="error-text"></div>
+        <button id="retry-btn" class="btn secondary">Retry</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
