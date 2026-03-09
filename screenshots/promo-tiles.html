@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Chrome Web Store Promo Tiles</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #111;
+}
+
+/* ===== Small Promo Tile: 440x280 ===== */
+#small-tile {
+  width: 440px;
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+#small-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 20%, rgba(252,175,69,0.10) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 80%, rgba(193,53,132,0.10) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 50%, rgba(131,58,180,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+#small-tile .icon {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+#small-tile .title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #262626;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.3px;
+}
+
+#small-tile .tagline {
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  max-width: 320px;
+  line-height: 1.4;
+}
+
+/* ===== Marquee Promo Tile: 1400x560 ===== */
+#marquee-tile {
+  width: 1400px;
+  height: 560px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  margin: 40px auto;
+  display: flex;
+  align-items: center;
+  padding: 0 120px;
+  gap: 60px;
+}
+
+#marquee-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 15% 30%, rgba(252,175,69,0.10) 0%, transparent 45%),
+              radial-gradient(ellipse at 85% 70%, rgba(193,53,132,0.10) 0%, transparent 45%),
+              radial-gradient(ellipse at 50% 50%, rgba(131,58,180,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+#marquee-tile .left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+#marquee-tile .icon {
+  width: 160px;
+  height: 160px;
+}
+
+#marquee-tile .right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+#marquee-tile .title {
+  font-size: 44px;
+  font-weight: 800;
+  color: #262626;
+  letter-spacing: -0.8px;
+  line-height: 1.1;
+}
+
+#marquee-tile .tagline {
+  font-size: 20px;
+  color: #555;
+  line-height: 1.4;
+  max-width: 700px;
+}
+
+#marquee-tile .features {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  background: rgba(255,255,255,0.9);
+  border: 1.5px solid #e0e0e0;
+  position: relative;
+}
+
+.pill::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #FCAF45, #E1306C, #833AB4);
+  z-index: -1;
+  opacity: 0.25;
+}
+
+.pill-icon {
+  font-size: 15px;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Small Promo Tile (440x280) ===== -->
+<div id="small-tile">
+  <img class="icon" src="../extension/icons/icon128.png" alt="Instagram DM Chat Extractor">
+  <div class="title">Instagram DM Chat Extractor</div>
+  <div class="tagline">Export your chats as JSON & Markdown</div>
+</div>
+
+<!-- ===== Marquee Promo Tile (1400x560) ===== -->
+<div id="marquee-tile">
+  <div class="left">
+    <img class="icon" src="../extension/icons/icon128.png" alt="Instagram DM Chat Extractor">
+  </div>
+  <div class="right">
+    <div class="title">Instagram DM<br>Chat Extractor</div>
+    <div class="tagline">Export your chats as JSON & Markdown — right from your browser.</div>
+    <div class="features">
+      <div class="pill"><span class="pill-icon">&#9889;</span> Smart Rate Limiting</div>
+      <div class="pill"><span class="pill-icon">&#128197;</span> Date Filtering</div>
+      <div class="pill"><span class="pill-icon">&#128202;</span> Conversation Stats</div>
+      <div class="pill"><span class="pill-icon">&#128274;</span> 100% Local</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

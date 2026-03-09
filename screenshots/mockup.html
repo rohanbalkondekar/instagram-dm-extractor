@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Instagram DM Extractor – Chrome Web Store Screenshots</title>
+<style>
+/* ===== Reset ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #111;
+}
+
+/* ===== Scene container ===== */
+.scene {
+  width: 1280px;
+  height: 800px;
+  position: relative;
+  overflow: hidden;
+  background: #fafafa;
+  margin: 0 auto 40px;
+}
+
+/* ===== Real Instagram DM background ===== */
+.ig-bg {
+  position: absolute;
+  top: 72px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.ig-bg img {
+  width: 1280px;
+  height: 728px;
+  display: block;
+  object-fit: cover;
+  filter: blur(12px);
+  transform: scale(1.04); /* prevent blur edge artifacts */
+}
+
+/* ===== Chrome toolbar mockup ===== */
+.chrome-toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: #dee1e6;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.chrome-tab-bar {
+  height: 36px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 8px;
+}
+
+.chrome-tab {
+  height: 32px;
+  background: #c8ccd0;
+  border-radius: 8px 8px 0 0;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #5f6368;
+  min-width: 180px;
+}
+
+.chrome-tab.active {
+  background: #fff;
+  color: #202124;
+}
+
+.chrome-tab-favicon {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
+}
+
+.chrome-tab-close {
+  margin-left: auto;
+  font-size: 14px;
+  color: #888;
+}
+
+.chrome-address-bar {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+}
+
+.chrome-nav-btns {
+  display: flex;
+  gap: 4px;
+}
+
+.chrome-nav-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5f6368;
+  font-size: 16px;
+  border-radius: 50%;
+}
+
+.chrome-url-bar {
+  flex: 1;
+  height: 28px;
+  background: #f1f3f4;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 13px;
+  color: #5f6368;
+}
+
+.chrome-url-lock {
+  margin-right: 6px;
+  color: #188038;
+  font-size: 12px;
+}
+
+.chrome-extensions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.chrome-ext-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ddd;
+}
+
+.chrome-ext-icon.active-ext {
+  background: #e8f0fe;
+  box-shadow: 0 0 0 2px #0095f6;
+}
+
+.chrome-ext-icon img {
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+}
+
+/* ===== Extension popup ===== */
+.ext-popup {
+  position: absolute;
+  top: 76px;
+  right: 80px;
+  width: 320px;
+  background: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.12);
+  z-index: 20;
+  overflow: hidden;
+}
+
+.ext-popup::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 24px;
+  width: 16px;
+  height: 16px;
+  background: #fafafa;
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 4px rgba(0,0,0,0.06);
+}
+
+/* ===== Popup internal styles (from popup.css) ===== */
+.popup-container { padding: 16px; }
+.popup-container h1 { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: #262626; }
+
+.thread-info { font-size: 13px; color: #555; margin-bottom: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.thread-info strong { color: #262626; }
+
+.btn { display: inline-block; padding: 8px 14px; border: 1px solid #dbdbdb; border-radius: 6px; background: #fff; color: #262626; font-size: 13px; font-weight: 600; cursor: pointer; }
+.btn.primary { background: #0095f6; color: #fff; border-color: #0095f6; width: 100%; text-align: center; }
+.btn.secondary { font-size: 12px; padding: 6px 10px; margin-top: 8px; color: #888; border-color: #ddd; }
+.btn-group { display: flex; gap: 8px; margin-top: 10px; }
+.btn-group .btn { flex: 1; text-align: center; }
+
+.progress-bar-container { width: 100%; height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden; margin-bottom: 6px; }
+.progress-bar { height: 100%; background: #0095f6; border-radius: 3px; }
+.progress-text { font-size: 12px; color: #888; }
+.complete-text { font-size: 13px; color: #28a745; font-weight: 600; margin-bottom: 2px; }
+
+.date-filter { margin-bottom: 10px; }
+.date-select { width: 100%; padding: 6px 8px; border: 1px solid #dbdbdb; border-radius: 6px; font-size: 13px; color: #262626; background: #fff; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+.custom-date-range { margin-top: 6px; }
+.date-input-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+.date-input-row label { font-size: 12px; color: #888; min-width: 36px; }
+.date-input { flex: 1; padding: 4px 6px; border: 1px solid #dbdbdb; border-radius: 4px; font-size: 12px; color: #262626; }
+
+.stats-section { margin: 8px 0; background: #f5f5f5; border-radius: 6px; font-size: 12px; overflow: hidden; }
+.stats-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; cursor: pointer; font-weight: 600; color: #262626; }
+.chevron { font-size: 10px; color: #888; }
+.stats-body { padding: 0 10px 8px; }
+.stats-row { display: flex; justify-content: space-between; padding: 2px 0; }
+.stats-label { color: #888; }
+.stats-value { color: #262626; font-weight: 500; }
+.stats-sub-header { font-size: 11px; font-weight: 600; color: #555; margin-top: 6px; margin-bottom: 2px; border-top: 1px solid #e0e0e0; padding-top: 4px; }
+.stats-sub-row { display: flex; justify-content: space-between; padding: 1px 0; padding-left: 6px; color: #444; }
+
+/* ===== Annotation callouts ===== */
+.callout { position: absolute; z-index: 30; display: flex; align-items: center; gap: 8px; }
+.callout-label { background: #262626; color: #fff; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.callout-line { width: 40px; height: 2px; background: #262626; }
+.callout-dot { width: 8px; height: 8px; border-radius: 50%; background: #262626; flex-shrink: 0; }
+
+/* ===== Dim overlay ===== */
+.ig-bg-dim {
+  position: absolute;
+  top: 72px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.5);
+  z-index: 5;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== SCENE 1: Ready State ==================== -->
+<div class="scene" id="ready">
+  <div class="chrome-toolbar">
+    <div class="chrome-tab-bar">
+      <div class="chrome-tab active">
+        <div class="chrome-tab-favicon"></div>
+        <span>Instagram</span>
+        <span class="chrome-tab-close">&times;</span>
+      </div>
+      <div class="chrome-tab">
+        <span style="color:#aaa; font-size:18px; margin-left:4px">+</span>
+      </div>
+    </div>
+    <div class="chrome-address-bar">
+      <div class="chrome-nav-btns">
+        <div class="chrome-nav-btn">&larr;</div>
+        <div class="chrome-nav-btn">&rarr;</div>
+        <div class="chrome-nav-btn">&#x21BB;</div>
+      </div>
+      <div class="chrome-url-bar">
+        <span class="chrome-url-lock">&#x1F512;</span>
+        instagram.com/direct/t/17843941128344718
+      </div>
+      <div class="chrome-extensions">
+        <div class="chrome-ext-icon"><div style="width:16px;height:16px;background:#ccc;border-radius:4px"></div></div>
+        <div class="chrome-ext-icon active-ext">
+          <img src="../extension/icons/icon48.png" alt="ext">
+        </div>
+        <div class="chrome-ext-icon"><div style="width:16px;height:16px;background:#ccc;border-radius:4px"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ig-bg"><img src="bg-real.png" alt="Instagram DM"></div>
+  <div class="ig-bg-dim"></div>
+
+  <div class="ext-popup">
+    <div class="popup-container">
+      <h1>Instagram DM Extractor</h1>
+      <div class="thread-info">Extract messages from <strong>Saloni Balkondekar</strong></div>
+      <div class="date-filter">
+        <select class="date-select" disabled>
+          <option selected>All messages</option>
+        </select>
+      </div>
+      <button class="btn primary">Extract Messages</button>
+    </div>
+  </div>
+
+  <div class="callout" style="top: 158px; right: 420px;">
+    <div class="callout-label">Auto-detects contact name</div>
+    <div class="callout-line"></div>
+    <div class="callout-dot"></div>
+  </div>
+  <div class="callout" style="top: 196px; right: 420px;">
+    <div class="callout-label">Date range filter</div>
+    <div class="callout-line"></div>
+    <div class="callout-dot"></div>
+  </div>
+  <div class="callout" style="top: 236px; right: 420px;">
+    <div class="callout-label">One-click extraction</div>
+    <div class="callout-line"></div>
+    <div class="callout-dot"></div>
+  </div>
+</div>
+
+<!-- ==================== SCENE 2: Extracting State ==================== -->
+<div class="scene" id="extracting">
+  <div class="chrome-toolbar">
+    <div class="chrome-tab-bar">
+      <div class="chrome-tab active">
+        <div class="chrome-tab-favicon"></div>
+        <span>Instagram</span>
+        <span class="chrome-tab-close">&times;</span>
+      </div>
+      <div class="chrome-tab">
+        <span style="color:#aaa; font-size:18px; margin-left:4px">+</span>
+      </div>
+    </div>
+    <div class="chrome-address-bar">
+      <div class="chrome-nav-btns">
+        <div class="chrome-nav-btn">&larr;</div>
+        <div class="chrome-nav-btn">&rarr;</div>
+        <div class="chrome-nav-btn">&#x21BB;</div>
+      </div>
+      <div class="chrome-url-bar">
+        <span class="chrome-url-lock">&#x1F512;</span>
+        instagram.com/direct/t/17843941128344718
+      </div>
+      <div class="chrome-extensions">
+        <div class="chrome-ext-icon"><div style="width:16px;height:16px;background:#ccc;border-radius:4px"></div></div>
+        <div class="chrome-ext-icon active-ext">
+          <img src="../extension/icons/icon48.png" alt="ext">
+        </div>
+        <div class="chrome-ext-icon"><div style="width:16px;height:16px;background:#ccc;border-radius:4px"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ig-bg"><img src="bg-real.png" alt="Instagram DM"></div>
+  <div class="ig-bg-dim"></div>
+
+  <div class="ext-popup">
+    <div class="popup-container">
+      <h1>Instagram DM Extractor</h1>
+      <div class="thread-info">Extracting from <strong>Saloni Balkondekar</strong></div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" style="width: 62%"></div>
+      </div>
+      <div class="progress-text">Page 12 &mdash; 347 messages</div>
+    </div>
+  </div>
+
+  <div class="callout" style="top: 172px; right: 420px;">
+    <div class="callout-label">Live progress tracking</div>
+    <div class="callout-line"></div>
+    <div class="callout-dot"></div>
+  </div>
+  <div class="callout" style="top: 202px; right: 420px;">
+    <div class="callout-label">Page &amp; message counter</div>
+    <div class="callout-line"></div>
+    <div class="callout-dot"></div>
+  </div>
+</div>
+
+<!-- ==================== SCENE 3: Complete State ==================== -->
+<div class="scene" id="complete">
+  <div class="chrome-toolbar">
+    <div class="chrome-tab-bar">
+      <div class="chrome-tab active">
+        <div class="chrome-tab-favicon"></div>
+        <span>Instagram</span>
+        <span class="chrome-tab-close">&times;</span>
+      </div>
+      <div class="chrome-tab">
+        <span style="color:#aaa; font-size:18px; margin-left:4px">+</span>
+      </div>
+    </div>
+    <div class="chrome-address-bar">
+      <div class="chrome-nav-btns">
+        <div class="chrome-nav-btn">&larr;</div>
+        <div class="chrome-nav-btn">&rarr;</div>
+        <div class="chrome-nav-btn">&#x21BB;</div>
+      </div>
+      <div class="chrome-url-bar">
+        <span class="chrome-url-lock">&#x1F512;</span>
+        instagram.com/direct/t/17843941128344718
+      </div>
+      <div class="chrome-extensions">
+        <div class="chrome-ext-icon"><div style="width:16px;height:16px;background:#ccc;border-radius:4px"></div></div>
+        <div class="chrome-ext-icon active-ext">
+          <img src="../extension/icons/icon48.png" alt="ext">
+        </div>
+        <div class="chrome-ext-icon"><div style="width:16px;height:16px;background:#ccc;border-radius:4px"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ig-bg"><img src="bg-real.png" alt="Instagram DM"></div>
+  <div class="ig-bg-dim"></div>
+
+  <div class="ext-popup">
+    <div class="popup-container">
+      <h1>Instagram DM Extractor</h1>
+      <div class="thread-info">Chat with <strong>Saloni Balkondekar</strong></div>
+      <div class="complete-text">Done! 1,247 messages extracted.</div>
+      <div class="stats-section">
+        <div class="stats-header">
+          <span>Stats</span>
+          <span class="chevron">&#9660;</span>
+        </div>
+        <div class="stats-body">
+          <div class="stats-row">
+            <span class="stats-label">Duration:</span>
+            <span class="stats-value">8 months</span>
+          </div>
+          <div class="stats-row">
+            <span class="stats-label">Date range:</span>
+            <span class="stats-value">Jul 2025 &mdash; Mar 2026</span>
+          </div>
+          <div class="stats-row">
+            <span class="stats-label">Avg/day:</span>
+            <span class="stats-value">5.2 messages</span>
+          </div>
+          <div class="stats-sub-header">Messages per sender</div>
+          <div class="stats-sub-row">
+            <span>Saloni</span>
+            <span>682 (54.7%)</span>
+          </div>
+          <div class="stats-sub-row">
+            <span>You</span>
+            <span>565 (45.3%)</span>
+          </div>
+          <div class="stats-sub-header">Conversation initiations</div>
+          <div class="stats-sub-row">
+            <span>Saloni</span>
+            <span>89 (58%)</span>
+          </div>
+          <div class="stats-sub-row">
+            <span>You</span>
+            <span>64 (42%)</span>
+          </div>
+          <div class="stats-sub-header">Avg response time</div>
+          <div class="stats-sub-row">
+            <span>Saloni</span>
+            <span>12m</span>
+          </div>
+          <div class="stats-sub-row">
+            <span>You</span>
+            <span>18m</span>
+          </div>
+          <div class="stats-sub-header">Message types</div>
+          <div class="stats-sub-row">
+            <span>Text</span>
+            <span>1,089 (87.3%)</span>
+          </div>
+          <div class="stats-sub-row">
+            <span>Media</span>
+            <span>94 (7.5%)</span>
+          </div>
+          <div class="stats-sub-row">
+            <span>Links</span>
+            <span>64 (5.1%)</span>
+          </div>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="btn">Download JSON</button>
+        <button class="btn">Download MD</button>
+      </div>
+      <button class="btn secondary" style="width:100%; text-align:center">Extract Again</button>
+    </div>
+  </div>
+
+  <div class="callout" style="top: 144px; right: 420px;">
+    <div class="callout-label">Detailed conversation stats</div>
+    <div class="callout-line"></div>
+    <div class="callout-dot"></div>
+  </div>
+  <div class="callout" style="bottom: 260px; right: 420px;">
+    <div class="callout-label">Export as JSON or Markdown</div>
+    <div class="callout-line"></div>
+    <div class="callout-dot"></div>
+  </div>
+</div>
+
+<!-- ==================== SCENE 4: Custom Date Filter ==================== -->
+<div class="scene" id="datefilter">
+  <div class="chrome-toolbar">
+    <div class="chrome-tab-bar">
+      <div class="chrome-tab active">
+        <div class="chrome-tab-favicon"></div>
+        <span>Instagram</span>
+        <span class="chrome-tab-close">&times;</span>
+      </div>
+      <div class="chrome-tab">
+        <span style="color:#aaa; font-size:18px; margin-left:4px">+</span>
+      </div>
+    </div>
+    <div class="chrome-address-bar">
+      <div class="chrome-nav-btns">
+        <div class="chrome-nav-btn">&larr;</div>
+        <div class="chrome-nav-btn">&rarr;</div>
+        <div class="chrome-nav-btn">&#x21BB;</div>
+      </div>
+      <div class="chrome-url-bar">
+        <span class="chrome-url-lock">&#x1F512;</span>
+        instagram.com/direct/t/17843941128344718
+      </div>
+      <div class="chrome-extensions">
+        <div class="chrome-ext-icon"><div style="width:16px;height:16px;background:#ccc;border-radius:4px"></div></div>
+        <div class="chrome-ext-icon active-ext">
+          <img src="../extension/icons/icon48.png" alt="ext">
+        </div>
+        <div class="chrome-ext-icon"><div style="width:16px;height:16px;background:#ccc;border-radius:4px"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ig-bg"><img src="bg-real.png" alt="Instagram DM"></div>
+  <div class="ig-bg-dim"></div>
+
+  <div class="ext-popup">
+    <div class="popup-container">
+      <h1>Instagram DM Extractor</h1>
+      <div class="thread-info">Extract messages from <strong>Saloni Balkondekar</strong></div>
+      <div class="date-filter">
+        <select class="date-select" disabled>
+          <option selected>Custom range</option>
+        </select>
+        <div class="custom-date-range">
+          <div class="date-input-row">
+            <label>From:</label>
+            <input type="text" class="date-input" value="2025-01-01" readonly>
+          </div>
+          <div class="date-input-row">
+            <label>To:</label>
+            <input type="text" class="date-input" value="2026-03-09" readonly>
+          </div>
+        </div>
+      </div>
+      <button class="btn primary">Extract Messages</button>
+    </div>
+  </div>
+
+  <div class="callout" style="top: 196px; right: 420px;">
+    <div class="callout-label">Custom date range filter</div>
+    <div class="callout-line"></div>
+    <div class="callout-dot"></div>
+  </div>
+  <div class="callout" style="top: 270px; right: 420px;">
+    <div class="callout-label">Extract specific time periods</div>
+    <div class="callout-line"></div>
+    <div class="callout-dot"></div>
+  </div>
+</div>
+
+</body>
+</html>

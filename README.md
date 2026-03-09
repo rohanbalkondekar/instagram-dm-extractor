@@ -1,11 +1,5 @@
 <p align="center">
-  <img src="extension/icons/icon128.png" width="80" />
-</p>
-
-<h1 align="center">Instagram DM Extractor</h1>
-
-<p align="center">
-  Extract Instagram DM conversations as <strong>JSON</strong> and <strong>Markdown</strong> — right from your browser.
+  <img src="screenshots/promo-marquee.png" alt="Instagram DM Chat Extractor" width="700" />
 </p>
 
 <p align="center">
@@ -13,6 +7,12 @@
   <img src="https://img.shields.io/badge/chrome-compatible-brightgreen?style=flat-square&logo=googlechrome&logoColor=white" alt="Chrome" />
   <img src="https://img.shields.io/badge/firefox-compatible-orange?style=flat-square&logo=firefox&logoColor=white" alt="Firefox" />
   <img src="https://img.shields.io/badge/license-MIT-yellow?style=flat-square" alt="MIT License" />
+</p>
+
+<p align="center">
+  <a href="https://youtu.be/fIPEUwBmvj8">
+    <img src="https://img.shields.io/badge/▶_Watch_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch Demo" />
+  </a>
 </p>
 
 ---
@@ -26,6 +26,19 @@
 | **Adaptive speed** | Starts fast, backs off on rate limits |
 | **Stats** | Per-sender counts, response times, conversation initiations, message types |
 | **Dual export** | JSON (structured) + Markdown (LLM-ready with metadata header) |
+
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center"><img src="screenshots/screenshot-ready.png" width="400" /><br /><em>Open a DM and click Extract</em></td>
+    <td align="center"><img src="screenshots/screenshot-datefilter.png" width="400" /><br /><em>Filter by custom date range</em></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="screenshots/screenshot-extracting.png" width="400" /><br /><em>Live progress tracking</em></td>
+    <td align="center"><img src="screenshots/screenshot-complete.png" width="400" /><br /><em>Conversation stats and export</em></td>
+  </tr>
+</table>
 
 ## Install
 
