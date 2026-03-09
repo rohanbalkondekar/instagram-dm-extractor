@@ -56,25 +56,24 @@
   }
 
   function setThreadInfo(text) {
-    const html = `<strong>${escapeHtml(text)}</strong>`;
-    els.threadInfo.innerHTML = html;
-    els.threadInfoExtracting.innerHTML = html;
-    els.threadInfoComplete.innerHTML = html;
+    [els.threadInfo, els.threadInfoExtracting, els.threadInfoComplete].forEach(el => {
+      const strong = document.createElement('strong');
+      strong.textContent = text;
+      el.replaceChildren(strong);
+    });
     els.extractBtn.textContent = `Extract Messages from ${text}`;
   }
 
-  function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-
   function renderSubSection(container, data) {
-    container.innerHTML = '';
+    container.replaceChildren();
     for (const [key, val] of Object.entries(data)) {
       const row = document.createElement('div');
       row.className = 'stats-sub-row';
-      row.innerHTML = `<span>${escapeHtml(key)}</span><span>${escapeHtml(String(val))}</span>`;
+      const keySpan = document.createElement('span');
+      keySpan.textContent = key;
+      const valSpan = document.createElement('span');
+      valSpan.textContent = String(val);
+      row.append(keySpan, valSpan);
       container.appendChild(row);
     }
   }
@@ -173,8 +172,11 @@
     const resp = await sendToContent(tab, { type: 'CHECK_PAGE' });
     if (!resp || !resp.onDmPage) {
       showState('notDm');
-      els.notDm.innerHTML =
-        'Open a DM conversation in <mark><b>full view</b></mark> to extract messages.';
+      const mark = document.createElement('mark');
+      const bold = document.createElement('b');
+      bold.textContent = 'full view';
+      mark.appendChild(bold);
+      els.notDm.replaceChildren('Open a DM conversation in ', mark, ' to extract messages.');
       return;
     }
 
