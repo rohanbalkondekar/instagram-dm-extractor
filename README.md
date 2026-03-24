@@ -12,23 +12,12 @@
 
 ***
 
-<table>
-  <thead>
-    <tr>
-      <th>Browser</th>
-      <th>Install from</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/74.1.0/chrome/chrome_48x48.png" height="40" alt="Chrome"></td>
-      <td><a href="https://chromewebstore.google.com/detail/instagram-dm-chat-extract/emfaleblgmheiblldkceadiokffhgcje">Chrome Web Store</a></td>
-    </tr>
-    <tr>
-      <td><img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/74.1.0/firefox/firefox_48x48.png" height="40" alt="Firefox"></td>
-      <td><a href="https://addons.mozilla.org/en-US/firefox/addon/instagram-dm-chat-extractor/">Firefox Add-ons</a></td>
-    </tr>
-  </tbody>
+<table align="center" width="100%">
+  <tr>
+    <td align="center"><a href="https://chromewebstore.google.com/detail/instagram-dm-chat-extract/emfaleblgmheiblldkceadiokffhgcje"><img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/74.1.0/chrome/chrome_48x48.png" height="36" alt="Chrome" /><br /><strong>Chrome Web Store</strong></a></td>
+    <td align="center"><a href="https://addons.mozilla.org/en-US/firefox/addon/instagram-dm-chat-extractor/"><img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/74.1.0/firefox/firefox_48x48.png" height="36" alt="Firefox" /><br /><strong>Firefox Add-ons</strong></a></td>
+    <td align="center"><a href="https://github.com/rohanbalkondekar/instagram-dm-extractor/releases/latest"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" height="36" alt="GitHub" /><br /><strong>GitHub Releases</strong></a></td>
+  </tr>
 </table>
 
 ***
