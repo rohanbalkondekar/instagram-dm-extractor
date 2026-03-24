@@ -4,18 +4,34 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/manifest-v3-blue?style=flat-square" alt="Manifest V3" />
-  <img src="https://img.shields.io/badge/chrome-compatible-brightgreen?style=flat-square&logo=googlechrome&logoColor=white" alt="Chrome" />
-  <img src="https://img.shields.io/badge/firefox-compatible-orange?style=flat-square&logo=firefox&logoColor=white" alt="Firefox" />
   <img src="https://img.shields.io/badge/license-MIT-yellow?style=flat-square" alt="MIT License" />
+  <a href="https://chromewebstore.google.com/detail/instagram-dm-chat-extract/emfaleblgmheiblldkceadiokffhgcje"><img src="https://img.shields.io/chrome-web-store/rating/emfaleblgmheiblldkceadiokffhgcje?label=Chrome&style=flat-square" alt="Chrome Web Store Rating" /></a>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/instagram-dm-chat-extractor/"><img src="https://img.shields.io/amo/rating/instagram-dm-chat-extractor?label=Firefox&style=flat-square" alt="Firefox Add-ons Rating" /></a>
+  <a href="https://youtu.be/fIPEUwBmvj8"><img src="https://img.shields.io/badge/▶_demo-FF0000?style=flat-square&logo=youtube&logoColor=white" alt="Watch Demo" /></a>
 </p>
 
-<p align="center">
-  <a href="https://youtu.be/fIPEUwBmvj8">
-    <img src="https://img.shields.io/badge/▶_Watch_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch Demo" />
-  </a>
-</p>
+***
 
----
+<table>
+  <thead>
+    <tr>
+      <th>Browser</th>
+      <th>Install from</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/74.1.0/chrome/chrome_48x48.png" height="40" alt="Chrome"></td>
+      <td><a href="https://chromewebstore.google.com/detail/instagram-dm-chat-extract/emfaleblgmheiblldkceadiokffhgcje">Chrome Web Store</a></td>
+    </tr>
+    <tr>
+      <td><img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/74.1.0/firefox/firefox_48x48.png" height="40" alt="Firefox"></td>
+      <td><a href="https://addons.mozilla.org/en-US/firefox/addon/instagram-dm-chat-extractor/">Firefox Add-ons</a></td>
+    </tr>
+  </tbody>
+</table>
+
+***
 
 ## Features
 
@@ -40,7 +56,7 @@
   </tr>
 </table>
 
-## Install
+## Install (development)
 
 **Chrome / Chromium:**
 1. Clone this repo
