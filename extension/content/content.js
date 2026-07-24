@@ -223,6 +223,15 @@ window.__igDmExtractorLoaded = true;
     }
   }
 
+  // Every export derives from state.jsonData (markdown is precomputed at
+  // extraction time; html/csv are built on demand).
+  function downloadAs(ext, run) {
+    if (!state.jsonData) return { downloaded: false, error: 'No data available.' };
+    const slug = (state.chatTitle || 'chat').replace(/[^\p{L}\p{M}\p{N}._-]/gu, '_').replace(/_+/g, '_').replace(/^_|_$/g, '').slice(0, 30) || 'chat';
+    run(`${slug}.${ext}`);
+    return { downloaded: true };
+  }
+
   function handleMessage(msg) {
     switch (msg.type) {
       case 'CHECK_PAGE':
@@ -263,20 +272,16 @@ window.__igDmExtractorLoaded = true;
         };
 
       case 'DOWNLOAD_JSON':
-        if (state.jsonData) {
-          const slug = (state.chatTitle || 'chat').replace(/[^\p{L}\p{M}\p{N}._-]/gu, '_').replace(/_+/g, '_').replace(/^_|_$/g, '').slice(0, 30) || 'chat';
-          ChatDownloader.downloadJson(state.jsonData, `${slug}.json`);
-          return { downloaded: true };
-        }
-        return { downloaded: false, error: 'No data available.' };
+        return downloadAs('json', (name) => ChatDownloader.downloadJson(state.jsonData, name));
 
       case 'DOWNLOAD_MD':
-        if (state.mdText) {
-          const slug = (state.chatTitle || 'chat').replace(/[^\p{L}\p{M}\p{N}._-]/gu, '_').replace(/_+/g, '_').replace(/^_|_$/g, '').slice(0, 30) || 'chat';
-          ChatDownloader.downloadMarkdown(state.mdText, `${slug}.md`);
-          return { downloaded: true };
-        }
-        return { downloaded: false, error: 'No data available.' };
+        return downloadAs('md', (name) => ChatDownloader.downloadMarkdown(state.mdText, name));
+
+      case 'DOWNLOAD_HTML':
+        return downloadAs('html', (name) => ChatDownloader.downloadHtml(ChatExporters.convertToHtml(state.jsonData), name));
+
+      case 'DOWNLOAD_CSV':
+        return downloadAs('csv', (name) => ChatDownloader.downloadCsv(ChatExporters.convertToCsv(state.jsonData), name));
 
       default:
         return null;

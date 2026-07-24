@@ -30,6 +30,7 @@
     "js": [
       "content/parser.js",
       "content/markdown.js",
+      "content/exporters.js",
       "content/downloader.js",
       "content/stats.js",
       "content/extractor.js",

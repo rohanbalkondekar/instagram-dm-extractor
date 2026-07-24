@@ -29,5 +29,13 @@ var ChatDownloader = (() => {
     downloadFile(text, filename, 'text/markdown');
   }
 
-  return { downloadFile, downloadJson, downloadMarkdown };
+  function downloadHtml(html, filename) {
+    downloadFile(html, filename, 'text/html;charset=utf-8');
+  }
+
+  function downloadCsv(csv, filename) {
+    downloadFile(csv, filename, 'text/csv;charset=utf-8');
+  }
+
+  return { downloadFile, downloadJson, downloadMarkdown, downloadHtml, downloadCsv };
 })();

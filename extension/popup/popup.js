@@ -19,8 +19,6 @@
     progressBar: document.getElementById('progress-bar'),
     progressText: document.getElementById('progress-text'),
     completeText: document.getElementById('complete-text'),
-    downloadJson: document.getElementById('download-json'),
-    downloadMd: document.getElementById('download-md'),
     extractAgain: document.getElementById('extract-again'),
     errorText: document.getElementById('error-text'),
     retryBtn: document.getElementById('retry-btn'),
@@ -118,6 +116,7 @@
   const CONTENT_SCRIPTS = [
     'content/parser.js',
     'content/markdown.js',
+    'content/exporters.js',
     'content/downloader.js',
     'content/stats.js',
     'content/extractor.js',
@@ -330,23 +329,23 @@
   });
   els.retryBtn.addEventListener('click', startExtraction);
 
-  els.downloadJson.addEventListener('click', async () => {
-    const tab = await getActiveTab();
-    if (!tab) return;
-    const resp = await sendToContent(tab, { type: 'DOWNLOAD_JSON' });
-    if (resp && !resp.downloaded) {
-      els.completeText.textContent = resp.error || 'Download failed.';
-    }
-  });
+  const DOWNLOAD_BUTTONS = {
+    'download-json': 'DOWNLOAD_JSON',
+    'download-md': 'DOWNLOAD_MD',
+    'download-html': 'DOWNLOAD_HTML',
+    'download-csv': 'DOWNLOAD_CSV',
+  };
 
-  els.downloadMd.addEventListener('click', async () => {
-    const tab = await getActiveTab();
-    if (!tab) return;
-    const resp = await sendToContent(tab, { type: 'DOWNLOAD_MD' });
-    if (resp && !resp.downloaded) {
-      els.completeText.textContent = resp.error || 'Download failed.';
-    }
-  });
+  for (const [id, type] of Object.entries(DOWNLOAD_BUTTONS)) {
+    document.getElementById(id).addEventListener('click', async () => {
+      const tab = await getActiveTab();
+      if (!tab) return;
+      const resp = await sendToContent(tab, { type });
+      if (resp && !resp.downloaded) {
+        els.completeText.textContent = resp.error || 'Download failed.';
+      }
+    });
+  }
 
   // Initial check
   checkPage();
