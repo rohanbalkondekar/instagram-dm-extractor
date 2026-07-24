@@ -30,7 +30,7 @@
 | **Date filtering** | All messages, past 1/7/30 days, or a custom range |
 | **Adaptive speed** | Starts fast, backs off on rate limits |
 | **Stats** | Per-sender counts, response times, conversation initiations, message types |
-| **Dual export** | JSON (structured) + Markdown (LLM-ready with metadata header) |
+| **Four export formats** | JSON (structured), Markdown (LLM-ready with metadata header), HTML (self-contained transcript), CSV (RFC 4180, Excel-safe UTF-8) |
 
 ## Screenshots
 
@@ -61,7 +61,13 @@
 1. Open a DM conversation on [instagram.com](https://www.instagram.com)
 2. Click the extension icon
 3. Pick a date range → **Extract Messages**
-4. Download as **JSON** or **MD**
+4. Download as **JSON**, **MD**, **HTML** or **CSV**
+
+## Tests
+
+```bash
+npm test    # node --test, no dependencies
+```
 
 ## How it works
 
