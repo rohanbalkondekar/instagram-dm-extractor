@@ -1,5 +1,9 @@
 # STATUS: DRAFT - REQUIRES OWNER APPROVAL. NOT FINAL COPY.
 
+> Superseded by `docs/RELEASE-2.3.0.md`, which carries the copy actually proposed
+> for the 2.3.0 submission. This file is kept for the character counts and the
+> variant reasoning behind them.
+
 Nothing in this file has been submitted, published, or written into `manifest.json`. The
 manifest still carries the current name and description unchanged. Owner picks a variant, or
 rejects all of them, before anything ships.
@@ -18,7 +22,9 @@ punctuation included.
 
 ## Current copy, verbatim
 
-Source: `extension/manifest.json` v2.2.0.
+Source: `extension/manifest.json` at v2.2.0, which is the version live in the store.
+The manifest in this branch is at 2.3.0 and still carries this same stale
+`description`, deliberately: it is store copy and it waits for approval.
 
 **Current title (`name`), 27 characters:**
 

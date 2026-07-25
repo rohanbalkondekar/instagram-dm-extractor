@@ -3,7 +3,7 @@
 Target item: **Instagram DM Chat Extractor**
 Item ID: `emfaleblgmheiblldkceadiokffhgcje`
 Listing: https://chromewebstore.google.com/detail/instagram-dm-chat-extract/emfaleblgmheiblldkceadiokffhgcje
-Audited against: `extension/manifest.json` v2.2.0, `docs/PRIVACY.md`, `screenshots/`, `README.md` (repo state, July 2026).
+Audited against: `extension/manifest.json` v2.3.0, `docs/PRIVACY.md`, `screenshots/`, `README.md` (repo state, July 2026).
 
 Two separate things, do them in this order:
 

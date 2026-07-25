@@ -69,6 +69,12 @@
 npm test    # node --test, no dependencies
 ```
 
+## Packaging
+
+```bash
+npm run package    # dist/instagram-dm-extractor.zip, manifest at the zip root
+```
+
 ## How it works
 
 Uses Instagram's web DM API (`/api/v1/direct_v2/threads/`) — the same one the webapp uses. Reads your session cookies to authenticate, paginates through messages, parses 15+ message types, and exports locally. **No data leaves your browser.**

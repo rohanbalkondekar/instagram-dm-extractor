@@ -84,3 +84,13 @@ Issues from OpenAI Codex (gpt-5.3-codex) review:
 - Round 1: FAIL (1 critical, 9 medium, 4 minor)
 - Round 2: FIX FIRST (8/9 fixed, missing `finally`)
 - Round 3: **SHIP**
+
+### v2.3 — HTML and CSV export (ready, not submitted)
+- [x] `content/exporters.js` — self-contained HTML transcript + RFC 4180 CSV
+- [x] Registered in both injection paths (`manifest.json` and `popup.js CONTENT_SCRIPTS`)
+- [x] `test/exporters.test.js` — 7 tests, `npm test`, zero dependencies
+- [x] Version 2.2.0 → 2.3.0
+- [x] `background.service_worker` restored — Chrome MV3 needs it, `main` had dropped it in `c600319`
+- [x] `npm run package` — repeatable submission zip, manifest at the zip root
+
+Release plan, packaging steps and DRAFT listing copy: `docs/RELEASE-2.3.0.md`.

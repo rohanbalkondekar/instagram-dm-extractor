@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "package": "rm -rf dist && mkdir -p dist && cd extension && zip -qr9X ../dist/instagram-dm-extractor.zip . -x '.*' '*/.*' && unzip -l ../dist/instagram-dm-extractor.zip"
   },
   "devDependencies": {
     "playwright": "^1.58.2"
