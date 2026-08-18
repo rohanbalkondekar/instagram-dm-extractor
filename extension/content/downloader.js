@@ -24,10 +24,13 @@ var ChatDownloader = (() => {
     const json = JSON.stringify(data, null, 2);
     downloadFile(json, filename, 'application/json');
   }
+  function downloadHtml(htmlContent, filename) {
+      downloadFile(htmlContent, filename, 'text/html');
+    }
 
   function downloadMarkdown(text, filename) {
     downloadFile(text, filename, 'text/markdown');
   }
 
-  return { downloadFile, downloadJson, downloadMarkdown };
+  return { downloadFile, downloadJson, downloadMarkdown, downloadHtml };
 })();

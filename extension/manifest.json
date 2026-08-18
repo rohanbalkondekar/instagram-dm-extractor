@@ -10,12 +10,12 @@
       }
     }
   },
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Extract Instagram DM conversations as JSON and Markdown",
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "host_permissions": ["https://www.instagram.com/*"],
   "background": {
-    "scripts": ["background.js"]
+    "service_worker": "background.js"
   },
   "action": {
     "default_popup": "popup/popup.html",
@@ -33,9 +33,14 @@
       "content/downloader.js",
       "content/stats.js",
       "content/extractor.js",
+      "content/html.js",
       "content/content.js"
     ],
     "run_at": "document_idle"
+  }],
+  "web_accessible_resources": [{
+    "resources": ["template/chat_export.html", "template/chat_export.js"],
+    "matches": ["https://www.instagram.com/*"]
   }],
   "icons": {
     "16": "icons/icon16.png",

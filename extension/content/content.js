@@ -223,6 +223,10 @@ window.__igDmExtractorLoaded = true;
     }
   }
 
+  function chatSlug() {
+    return (state.chatTitle || 'chat').replace(/[^\p{L}\p{M}\p{N}._-]/gu, '_').replace(/_+/g, '_').replace(/^_|_$/g, '').slice(0, 30) || 'chat';
+  }
+
   function handleMessage(msg) {
     switch (msg.type) {
       case 'CHECK_PAGE':
@@ -264,19 +268,78 @@ window.__igDmExtractorLoaded = true;
 
       case 'DOWNLOAD_JSON':
         if (state.jsonData) {
-          const slug = (state.chatTitle || 'chat').replace(/[^\p{L}\p{M}\p{N}._-]/gu, '_').replace(/_+/g, '_').replace(/^_|_$/g, '').slice(0, 30) || 'chat';
-          ChatDownloader.downloadJson(state.jsonData, `${slug}.json`);
+          ChatDownloader.downloadJson(state.jsonData, `${chatSlug()}.json`);
           return { downloaded: true };
         }
         return { downloaded: false, error: 'No data available.' };
 
       case 'DOWNLOAD_MD':
         if (state.mdText) {
-          const slug = (state.chatTitle || 'chat').replace(/[^\p{L}\p{M}\p{N}._-]/gu, '_').replace(/_+/g, '_').replace(/^_|_$/g, '').slice(0, 30) || 'chat';
-          ChatDownloader.downloadMarkdown(state.mdText, `${slug}.md`);
+          ChatDownloader.downloadMarkdown(state.mdText, `${chatSlug()}.md`);
           return { downloaded: true };
         }
         return { downloaded: false, error: 'No data available.' };
+
+      case 'DOWNLOAD_TXT':
+        if (state.mdText) {
+          ChatDownloader.downloadFile(state.mdText, `${chatSlug()}.txt`, 'text/plain');
+          return { downloaded: true };
+        }
+        return { downloaded: false, error: 'No data available.' };
+
+      case 'DOWNLOAD_CSV':
+        if (state.jsonData) {
+          // Prefix a quote to cells that a spreadsheet would treat as a formula
+          // (=, +, -, @, tab, CR) so attacker message text can't run on open.
+          const esc = v => {
+            const s = String(v == null ? '' : v);
+            const safe = /^[=+\-@\t\r]/.test(s) ? `'${s}` : s;
+            return `"${safe.replace(/"/g, '""')}"`;
+          };
+          const rows = ['timestamp,sender,type,text'];
+          for (const m of state.jsonData.messages || []) {
+            rows.push([new Date(m.timestampUnix * 1000).toISOString(), m.sender, m.type, m.text || ''].map(esc).join(','));
+          }
+          ChatDownloader.downloadFile(rows.join('\r\n'), `${chatSlug()}.csv`, 'text/csv');
+          return { downloaded: true };
+        }
+        return { downloaded: false, error: 'No data available.' };
+
+      case 'DOWNLOAD_HTML':
+        if (state.jsonData) {
+          // Return a Promise for async operation
+          return (async () => {
+            try {
+              const htmlContent = await ChatHtmlGenerator.generateHtml(state.jsonData, state.stats);
+              ChatDownloader.downloadHtml(htmlContent, `${chatSlug()}.html`);
+              return { downloaded: true };
+            } catch (err) {
+              console.error('HTML generation failed:', err);
+              return { downloaded: false, error: err.message || 'HTML generation failed.' };
+            }
+          })();
+        }
+        return Promise.resolve({ downloaded: false, error: 'No data available.' });
+
+      case 'PREPARE_PDF':
+        // Stash the chat in extension storage and let the popup open the export as
+        // an extension-origin page. A blob URL made here is owned by the
+        // instagram.com principal, which Firefox refuses to open from the popup —
+        // storage keeps the print page on the extension's own origin on both browsers.
+        if (state.jsonData) {
+          return (async () => {
+            try {
+              await browserAPI.storage.local.set({
+                igdmPendingPdf: { chat: state.jsonData, stats: state.stats || {}, exportedAt: Date.now() },
+              });
+              return { ok: true };
+            } catch (err) {
+              console.error('PDF preparation failed:', err);
+              return { ok: false, error: err.message || 'PDF preparation failed.' };
+            }
+          })();
+        }
+        return Promise.resolve({ ok: false, error: 'No data available.' });
 
       default:
         return null;
@@ -289,6 +352,9 @@ window.__igDmExtractorLoaded = true;
   // Also keep runtime.onMessage for Firefox and content-script-to-popup messages
   browserAPI.runtime.onMessage.addListener((msg, _sender) => {
     const result = handleMessage(msg);
+    if (result && typeof result.then === 'function') {
+      return result;
+    }
     return result !== null ? Promise.resolve(result) : false;
   });
 })();
