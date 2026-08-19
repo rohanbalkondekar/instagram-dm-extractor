@@ -46,7 +46,7 @@ var ChatMarkdown = (() => {
 
     let text = msg.text || '';
 
-    // Clean Instagram redirect URLs in link messages
+    // Link messages: show the real destination (parser already unwrapped it).
     if (msg.type === 'link' && msg.linkUrl) {
       text = cleanInstagramUrl(msg.linkUrl);
     }
@@ -55,6 +55,9 @@ var ChatMarkdown = (() => {
     text = text.replace(/\n+/g, ' | ');
 
     const parts = [`[${timeStr}] ${sender}: ${text}`];
+
+    // Permanent link to shared reels/posts/clips.
+    if (msg.permalink) parts.push(` ${msg.permalink}`);
 
     // Reply context
     const replyTo = msg.replyTo;

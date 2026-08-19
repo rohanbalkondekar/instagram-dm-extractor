@@ -296,9 +296,10 @@ window.__igDmExtractorLoaded = true;
             const safe = /^[=+\-@\t\r]/.test(s) ? `'${s}` : s;
             return `"${safe.replace(/"/g, '""')}"`;
           };
-          const rows = ['timestamp,sender,type,text'];
+          const rows = ['timestamp,sender,type,text,link'];
           for (const m of state.jsonData.messages || []) {
-            rows.push([new Date(m.timestampUnix * 1000).toISOString(), m.sender, m.type, m.text || ''].map(esc).join(','));
+            const link = m.permalink || m.linkUrl || m.mediaUrl || '';
+            rows.push([new Date(m.timestampUnix * 1000).toISOString(), m.sender, m.type, m.text || '', link].map(esc).join(','));
           }
           ChatDownloader.downloadFile(rows.join('\r\n'), `${chatSlug()}.csv`, 'text/csv');
           return { downloaded: true };

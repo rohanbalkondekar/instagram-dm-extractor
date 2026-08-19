@@ -237,6 +237,18 @@
 
                 row.appendChild(cw);
 
+                // Permanent link to a shared reel/post/clip. Only render our own
+                // validated https instagram.com permalinks, never arbitrary text.
+                if (msg.permalink && /^https:\/\/www\.instagram\.com\//.test(msg.permalink)) {
+                    const a = document.createElement('a');
+                    a.className = 'permalink-chip';
+                    a.href = msg.permalink;
+                    a.target = '_blank';
+                    a.rel = 'noopener';
+                    a.textContent = '🔗 Open on Instagram';
+                    row.appendChild(a);
+                }
+
                 if (msg._showTimestamp) {
                     const ts = document.createElement('div');
                     ts.className = 'message-timestamp';

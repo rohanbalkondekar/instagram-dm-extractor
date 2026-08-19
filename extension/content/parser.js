@@ -19,6 +19,25 @@ var ChatParser = (() => {
       `${pad(dt.getUTCHours())}:${pad(dt.getUTCMinutes())}:${pad(dt.getUTCSeconds())} UTC`;
   }
 
+  // Unwrap Instagram's l.instagram.com/?u=<encoded> redirect to the real URL.
+  function cleanUrl(url) {
+    try {
+      const p = new URL(url);
+      if (p.hostname.includes('instagram.com')) {
+        const u = p.searchParams.get('u');
+        if (u) return decodeURIComponent(u);
+      }
+    } catch (_) { /* not a URL */ }
+    return url;
+  }
+
+  // Build a permanent instagram.com link from a shared item's shortcode.
+  // kind: 'p' for a feed post, 'reel' for a reel/clip. Returns '' if no valid code.
+  function igPermalink(code, kind) {
+    if (!code || !/^[A-Za-z0-9_-]+$/.test(code)) return '';
+    return 'https://www.instagram.com/' + kind + '/' + code + '/';
+  }
+
   function buildUserMap(threadInfo, myUserId) {
     const userMap = {};
     for (const u of (threadInfo.users || [])) {
@@ -82,6 +101,8 @@ var ChatParser = (() => {
         const user = (shared.user || {}).username || '';
         msg.text = user ? `[Shared post by @${user}]` : '[Shared post]';
         if (captionText) msg.text += `: ${captionText.slice(0, 100)}`;
+        const link = igPermalink(shared.code, 'p');
+        if (link) msg.permalink = link;
         break;
       }
 
@@ -95,6 +116,8 @@ var ChatParser = (() => {
         msg.text = reactionText || '[Reel share]';
         if (captionText) msg.reelCaption = captionText.slice(0, 200);
         if (reelOwner) msg.reelOwner = reelOwner;
+        const link = igPermalink(reelMedia.code, 'reel');
+        if (link) msg.permalink = link;
         break;
       }
 
@@ -131,7 +154,7 @@ var ChatParser = (() => {
         const linkCtx = link.link_context || {};
         const url = linkCtx.link_url || '';
         msg.text = text || url || '[Link]';
-        if (url) msg.linkUrl = url;
+        if (url) msg.linkUrl = cleanUrl(url);
         break;
       }
 
@@ -142,6 +165,8 @@ var ChatParser = (() => {
         const owner = (clip.user || {}).username || '';
         msg.text = owner ? `[Clip by @${owner}]` : '[Clip]';
         if (captionText) msg.clipCaption = captionText.slice(0, 200);
+        const link = igPermalink(clip.code, 'reel');
+        if (link) msg.permalink = link;
         break;
       }
 
