@@ -1,11 +1,11 @@
 # Privacy Policy
 
-**Instagram DM Chat Extractor**
-**Effective date:** March 9, 2026
+**Instagram Chat Downloader & DM Export**
+**Effective date:** August 20, 2026
 
 ## Introduction
 
-Instagram DM Chat Extractor ("the Extension") is an open-source browser extension that allows users to export their Instagram direct message conversations. This privacy policy explains how the Extension handles user data.
+Instagram Chat Downloader & DM Export ("the Extension") is an open-source browser extension that lets users download their Instagram direct message conversations. This privacy policy explains how the Extension handles user data.
 
 ## Data Collection
 
