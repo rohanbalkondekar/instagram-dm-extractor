@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="screenshots/promo-marquee.png" alt="Instagram DM Chat Extractor" width="700" />
+  <img src="screenshots/promo-marquee.png" alt="Instagram Chat Downloader and DM Export" width="700" />
 </p>
 
 <p align="center">
@@ -30,7 +30,9 @@
 | **Date filtering** | All messages, past 1/7/30 days, or a custom range |
 | **Adaptive speed** | Starts fast, backs off on rate limits |
 | **Stats** | Per-sender counts, response times, conversation initiations, message types |
-| **Dual export** | JSON (structured) + Markdown (LLM-ready with metadata header) |
+| **Six export formats** | PDF, plain text, styled HTML, CSV, JSON, and Markdown |
+| **Permanent shared links** | Keeps links to shared posts, reels, and profiles in the export |
+| **Private by design** | Runs in your browser and does not upload chats to a remote service |
 
 ## Screenshots
 
@@ -61,11 +63,11 @@
 1. Open a DM conversation on [instagram.com](https://www.instagram.com)
 2. Click the extension icon
 3. Pick a date range → **Extract Messages**
-4. Download as **JSON** or **MD**
+4. Save the chat as **PDF**, **Text**, **HTML**, **CSV**, **JSON**, or **Markdown**
 
 ## How it works
 
-Uses Instagram's web DM API (`/api/v1/direct_v2/threads/`) — the same one the webapp uses. Reads your session cookies to authenticate, paginates through messages, parses 15+ message types, and exports locally. **No data leaves your browser.**
+Uses Instagram's web DM API (`/api/v1/direct_v2/threads/`) — the same one the web app uses. It uses your existing Instagram session, paginates through messages, parses 15+ message types, and exports locally. **No chat data is uploaded to the developer or another remote service.**
 
 ## License
 

@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Instagram DM Chat Extractor",
+  "name": "Instagram Chat Downloader & DM Export",
   "browser_specific_settings": {
     "gecko": {
       "id": "ig-dm-extractor@rohanbalkondekar.dev",
@@ -11,7 +11,7 @@
     }
   },
   "version": "2.4.0",
-  "description": "Extract Instagram DM conversations as JSON and Markdown",
+  "description": "Download your Instagram DMs as PDF, TXT, HTML, CSV, JSON, or Markdown. Private, local chat export.",
   "permissions": ["activeTab", "scripting", "storage"],
   "host_permissions": ["https://www.instagram.com/*"],
   "background": {

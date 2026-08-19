@@ -1,4 +1,4 @@
-# Firefox AMO Listing — Instagram DM Chat Extractor
+# Firefox AMO Listing — Instagram Chat Downloader & DM Export
 
 Copy-paste values for the **Describe Add-on** submission form on [addons.mozilla.org](https://addons.mozilla.org).
 
@@ -7,26 +7,27 @@ Copy-paste values for the **Describe Add-on** submission form on [addons.mozilla
 ## Name
 
 ```
-Instagram DM Chat Extractor
+Instagram Chat Downloader & DM Export
 ```
 
 ## Summary (250 chars max)
 
 ```
-Extract Instagram DM conversations as JSON and Markdown
+Download Instagram DMs as PDF, TXT, HTML, CSV, JSON, or Markdown. Private, local chat export.
 ```
 
 ## Description (Markdown supported)
 
 ```
-Extract your Instagram DM conversations directly from the browser — no data ever leaves your machine.
+Download your Instagram DM conversations from the browser. No chat data is uploaded to the developer or another remote service.
 
 **Features:**
 - **Chat name resolution** — shows contact names, not cryptic thread IDs
 - **Date filtering** — all messages, past 1/7/30 days, or a custom range
 - **Adaptive speed** — starts fast, backs off on rate limits
 - **Stats** — per-sender counts, response times, conversation initiations, message types
-- **Dual export** — JSON (structured) + Markdown (LLM-ready with metadata header)
+- **Six export formats** — PDF, plain text, styled HTML, CSV, JSON, and Markdown
+- **Permanent shared links** — keeps links to shared posts, reels, and profiles
 
 Open source (MIT). Full source code: [github.com/rohanbalkondekar/instagram-dm-extractor](https://github.com/rohanbalkondekar/instagram-dm-extractor)
 ```
@@ -67,7 +68,7 @@ MIT License
 Select **Yes**, then paste:
 
 ```
-Instagram DM Chat Extractor ("the Extension") is an open-source browser extension that allows users to export their Instagram direct message conversations.
+Instagram Chat Downloader & DM Export ("the Extension") is an open-source browser extension that lets users download their Instagram direct message conversations.
 
 Data Collection:
 The Extension does NOT collect, store, or transmit any personal data. No personal information is collected. No usage data or analytics are collected. No cookies are set by the Extension. No data is sent to external servers, third-party services, or the developer.
@@ -96,7 +97,7 @@ How to test:
 4. The popup shows the chat name and a date-range picker.
 5. Select a date range (or leave "All messages") and click "Extract Messages".
 6. The extension scrolls through messages via Instagram's web API.
-7. Once complete, click "Download JSON" or "Download MD" to save the export locally.
+7. Once complete, save the chat as PDF, Text, HTML, CSV, JSON, or Markdown.
 
 No external services are contacted — all data stays in the browser. The extension only activates on instagram.com pages.
 
