@@ -1,3 +1,7 @@
+# Instagram Chat Downloader & DM Export
+
+Download an Instagram conversation as PDF, plain text, HTML, CSV, JSON, or Markdown. The Chrome and Firefox extension uses your existing Instagram session and creates each export locally in the browser.
+
 <p align="center">
   <img src="screenshots/promo-marquee.png" alt="Instagram Chat Downloader and DM Export" width="700" />
 </p>
