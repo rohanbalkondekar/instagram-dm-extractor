@@ -32,6 +32,7 @@ The Extension requests the following browser permissions, each strictly necessar
 
 - **activeTab** — To detect whether the current tab is an Instagram DM conversation.
 - **scripting** — To inject content scripts that interact with Instagram's messaging API.
+- **storage** — To pass an extracted conversation from the popup to the local export/print page inside the browser. Nothing is stored remotely or sent anywhere, and the data is removed after the export page reads it.
 - **Host access to instagram.com** — To make API requests to Instagram's servers for retrieving message data.
 
 ## Third-Party Services
