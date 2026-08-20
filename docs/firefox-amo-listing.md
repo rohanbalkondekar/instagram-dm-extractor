@@ -13,7 +13,7 @@ Instagram Chat Downloader & DM Export
 ## Summary (250 chars max)
 
 ```
-Download Instagram DMs as PDF, TXT, HTML, CSV, JSON, or Markdown. Private, local chat export.
+Export your Instagram conversations privately. Files are created locally in your browser.
 ```
 
 ## Description (Markdown supported)
