@@ -6,7 +6,7 @@ Instagram Chat Downloader & DM Export
 
 ## Summary
 
-Download your Instagram DMs as PDF, TXT, HTML, CSV, JSON, or Markdown. Private, local chat export.
+Export your Instagram conversations privately. Files are created locally in your browser.
 
 ## Description
 
@@ -46,4 +46,4 @@ Instagram Chat Downloader & DM Export is an independent extension. It is not aff
 
 ## What is new
 
-v2.4.0: Renamed the extension to make chat download and export clearer. Added permanent links for shared posts, reels, and profiles in exports.
+v2.4.1: Clarified the extension summary for Chrome Web Store policy compliance. Export features are unchanged.

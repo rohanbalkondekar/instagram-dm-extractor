@@ -10,8 +10,8 @@
       }
     }
   },
-  "version": "2.4.0",
-  "description": "Download your Instagram DMs as PDF, TXT, HTML, CSV, JSON, or Markdown. Private, local chat export.",
+  "version": "2.4.1",
+  "description": "Export your Instagram conversations privately. Files are created locally in your browser.",
   "permissions": ["activeTab", "scripting", "storage"],
   "host_permissions": ["https://www.instagram.com/*"],
   "background": {
