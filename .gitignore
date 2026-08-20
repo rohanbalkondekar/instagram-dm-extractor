@@ -6,4 +6,5 @@ __pycache__/
 .DS_Store
 .playwright-mcp/
 node_modules/
+dist/
 *.log

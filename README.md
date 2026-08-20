@@ -36,7 +36,7 @@ Download an Instagram conversation as PDF, plain text, HTML, CSV, JSON, or Markd
 | **Stats** | Per-sender counts, response times, conversation initiations, message types |
 | **Six export formats** | PDF, plain text, styled HTML, CSV, JSON, and Markdown |
 | **Permanent shared links** | Keeps links to shared posts, reels, and profiles in the export |
-| **Private by design** | Runs in your browser and does not upload chats to a remote service |
+| **Local export** | The developer does not receive your account or conversation data |
 
 ## Screenshots
 
@@ -71,7 +71,11 @@ Download an Instagram conversation as PDF, plain text, HTML, CSV, JSON, or Markd
 
 ## How it works
 
-Uses Instagram's web DM API (`/api/v1/direct_v2/threads/`) — the same one the web app uses. It uses your existing Instagram session, paginates through messages, parses 15+ message types, and exports locally. **No chat data is uploaded to the developer or another remote service.**
+Uses Instagram's web DM API (`/api/v1/direct_v2/threads/`), the same API that the web app uses. It uses your existing Instagram session, paginates through messages, parses 15+ message types, and exports locally. **The developer does not receive your account or conversation data.**
+
+## Privacy
+
+The extension processes the selected conversation in your browser. Exported HTML or PDF files can request message media from Meta hosts or Giphy when opened. See the [privacy policy](docs/PRIVACY.md) for the data types, local PDF storage, retention, permissions, and Limited Use terms.
 
 ## License
 

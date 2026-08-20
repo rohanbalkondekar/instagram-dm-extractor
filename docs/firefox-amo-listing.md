@@ -1,35 +1,34 @@
-# Firefox AMO Listing — Instagram Chat Downloader & DM Export
+# Firefox AMO listing: Instagram Chat Downloader & DM Export
 
-Copy-paste values for the **Describe Add-on** submission form on [addons.mozilla.org](https://addons.mozilla.org).
-
----
+Copy these values into the **Describe Add-on** form on [addons.mozilla.org](https://addons.mozilla.org).
 
 ## Name
 
-```
+```text
 Instagram Chat Downloader & DM Export
 ```
 
-## Summary (250 chars max)
+## Summary
 
+```text
+Export one Instagram conversation to files created in your browser.
 ```
-Export your Instagram conversations privately. Files are created locally in your browser.
-```
 
-## Description (Markdown supported)
+## Description
 
-```
-Download your Instagram DM conversations from the browser. No chat data is uploaded to the developer or another remote service.
+```markdown
+Save one DM conversation from your own account as PDF, plain text, HTML, CSV, JSON, or Markdown.
 
-**Features:**
-- **Chat name resolution** — shows contact names, not cryptic thread IDs
-- **Date filtering** — all messages, past 1/7/30 days, or a custom range
-- **Adaptive speed** — starts fast, backs off on rate limits
-- **Stats** — per-sender counts, response times, conversation initiations, message types
-- **Six export formats** — PDF, plain text, styled HTML, CSV, JSON, and Markdown
-- **Permanent shared links** — keeps links to shared posts, reels, and profiles
+Features:
+- Contact and group names
+- Preset and custom date ranges
+- Adaptive request pacing
+- Local conversation statistics
+- Permanent links for shared posts, reels, and profiles
 
-Open source (MIT). Full source code: [github.com/rohanbalkondekar/instagram-dm-extractor](https://github.com/rohanbalkondekar/instagram-dm-extractor)
+The developer does not receive your account or conversation data. An opened HTML or PDF export can request message media from Meta hosts or Giphy. The popup and exported HTML include an optional link to a related extension's Chrome Web Store page.
+
+Open source under the MIT License: [github.com/rohanbalkondekar/instagram-dm-extractor](https://github.com/rohanbalkondekar/instagram-dm-extractor)
 ```
 
 ## Experimental
@@ -45,61 +44,55 @@ Open source (MIT). Full source code: [github.com/rohanbalkondekar/instagram-dm-e
 1. Social & Communication
 2. Download Management
 
-## Support email
-
-```
-(leave blank or fill in your email)
-```
-
 ## Support website
 
-```
+```text
 https://github.com/rohanbalkondekar/instagram-dm-extractor
 ```
 
 ## License
 
-```
+```text
 MIT License
 ```
 
 ## Privacy Policy
 
-Select **Yes**, then paste:
+Select **Yes** and use the canonical policy:
 
+```text
+https://github.com/rohanbalkondekar/instagram-dm-extractor/blob/main/docs/PRIVACY.md
 ```
-Instagram Chat Downloader & DM Export ("the Extension") is an open-source browser extension that lets users download their Instagram direct message conversations.
 
-Data Collection:
-The Extension does NOT collect, store, or transmit any personal data. No personal information is collected. No usage data or analytics are collected. No cookies are set by the Extension. No data is sent to external servers, third-party services, or the developer.
+The policy discloses these data types and behaviors:
 
-How it works:
-The Extension operates entirely within your browser. It uses your existing Instagram session cookies to make requests to Instagram's web API. Message data is processed locally in your browser's memory. The exported file is saved directly to your device using the browser's built-in download functionality. At no point does any data leave your browser or get transmitted to any server other than Instagram's own servers.
-
-Permissions:
-- activeTab — detect whether the current tab is an Instagram DM conversation
-- scripting — inject content scripts that interact with Instagram's messaging API
-- Host access to instagram.com — make API requests for retrieving message data
-
-The Extension does not integrate with or send data to any third-party services.
-
-Full policy: https://github.com/rohanbalkondekar/instagram-dm-extractor/blob/main/docs/PRIVACY.md
-```
+- Instagram account identifiers and usernames
+- Personal communications and message metadata
+- Website content, links, and media URLs
+- The first-party `csrftoken` and `ds_user_id` cookies
+- The pending PDF export in local extension storage
+- Direct media requests to Instagram or Meta hosts and Giphy
+- The Limited Use terms
 
 ## Notes to Reviewer
 
-```
+```text
 How to test:
 
-1. You need an Instagram account (instagram.com).
-2. Log in and open any DM conversation (instagram.com/direct/inbox/, then click a thread).
-3. Click the extension icon in the toolbar.
-4. The popup shows the chat name and a date-range picker.
-5. Select a date range (or leave "All messages") and click "Extract Messages".
-6. The extension scrolls through messages via Instagram's web API.
-7. Once complete, save the chat as PDF, Text, HTML, CSV, JSON, or Markdown.
+1. Sign in at instagram.com.
+2. Open a DM conversation.
+3. Select the extension icon.
+4. Choose a date range and select Extract Messages.
+5. Save the result as PDF, text, HTML, CSV, JSON, or Markdown.
+6. Confirm that the PDF print page removes igdmPendingPdf from local extension storage after reading it.
 
-No external services are contacted — all data stays in the browser. The extension only activates on instagram.com pages.
+Permissions:
+- scripting communicates with the packaged content scripts on the supported site.
+- storage holds one pending local PDF export.
+- https://www.instagram.com/* access reads the chosen conversation and calls the site's API.
 
-Source code: https://github.com/rohanbalkondekar/instagram-dm-extractor
+The developer does not receive account or conversation data. An opened HTML or PDF export can request message media from Meta hosts or Giphy.
+
+Source code and privacy policy:
+https://github.com/rohanbalkondekar/instagram-dm-extractor
 ```

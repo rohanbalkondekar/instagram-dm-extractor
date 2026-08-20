@@ -10,9 +10,9 @@
       }
     }
   },
-  "version": "2.4.1",
-  "description": "Export your Instagram conversations privately. Files are created locally in your browser.",
-  "permissions": ["activeTab", "scripting", "storage"],
+  "version": "2.4.2",
+  "description": "Export one Instagram conversation to files created in your browser.",
+  "permissions": ["scripting", "storage"],
   "host_permissions": ["https://www.instagram.com/*"],
   "background": {
     "service_worker": "background.js"
