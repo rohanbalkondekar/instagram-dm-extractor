@@ -1,52 +1,54 @@
 # Privacy Policy
 
 **Instagram Chat Downloader & DM Export**
-**Effective date:** August 20, 2026
 
-## Introduction
+**Effective date:** August 21, 2026
 
-Instagram Chat Downloader & DM Export ("the Extension") is an open-source browser extension that lets users download their Instagram direct message conversations. This privacy policy explains how the Extension handles user data.
+## Scope
 
-## Data Collection
+The extension exports a direct-message conversation that you choose from your signed-in account. It processes the data in your browser. The developer does not receive or retain your account or conversation data.
 
-The Extension does **not** collect, store, or transmit any personal data. Specifically:
+## Data the extension handles
 
-- No personal information is collected.
-- No usage data or analytics are collected.
-- No cookies are set by the Extension.
-- No data is sent to external servers, third-party services, or the developer.
+The extension handles these data types only for the export that you request:
 
-## How the Extension Works
+- Instagram account identifiers and usernames
+- Personal communications, reactions, timestamps, and message metadata
+- Website content, links, and media URLs in the conversation
+- Authentication information: the `csrftoken` and `ds_user_id` cookies from your existing session
 
-The Extension operates entirely within your browser. When you initiate an extraction:
+The extension does not collect analytics, create an advertising profile, or send conversation data to the developer.
 
-1. It uses your existing Instagram session (cookies already present in your browser) to make requests to Instagram's web API.
-2. Message data is processed locally in your browser's memory.
-3. The exported file is saved directly to your device using the browser's built-in download functionality.
+## Processing and storage
 
-At no point does any data leave your browser or get transmitted to any server other than Instagram's own servers (which your browser is already communicating with).
+The extension sends HTTPS requests to Instagram's web API through your signed-in session. It processes the response in the content script's memory and creates the selected file in your browser.
+
+For PDF export, the extension writes one pending export to `chrome.storage.local`. The print page removes it after reading it. If the print page does not open or finish loading, the pending export can remain until another PDF export overwrites it, you clear the extension's data, or you remove the extension.
+
+## Remote media
+
+An HTML or PDF export can display media URLs included in the conversation. Opening that export can make direct requests to Instagram or Meta media hosts and Giphy. Those services receive the normal request data needed to return the media, such as the media URL, IP address, and browser headers. The extension does not send the full conversation or message text with those requests.
+
+The popup and exported HTML also contain an optional link to the Instagrow Chrome Web Store page. The browser contacts the Chrome Web Store only if you select that link.
 
 ## Permissions
 
-The Extension requests the following browser permissions, each strictly necessary for its core functionality:
+- **scripting** lets the popup communicate with the packaged content scripts on the supported site.
+- **storage** holds the pending local PDF export described above.
+- **Access to `https://www.instagram.com/*`** lets the extension read the chosen conversation and call the site's API.
 
-- **activeTab** — To detect whether the current tab is an Instagram DM conversation.
-- **scripting** — To inject content scripts that interact with Instagram's messaging API.
-- **storage** — To pass an extracted conversation from the popup to the local export/print page inside the browser. Nothing is stored remotely or sent anywhere, and the data is removed after the export page reads it.
-- **Host access to instagram.com** — To make API requests to Instagram's servers for retrieving message data.
+The extension does not request the Chrome cookies permission. It reads the two named first-party cookies from the page context.
 
-## Third-Party Services
+## Limited Use
 
-The Extension does not integrate with or send data to any third-party services.
+The extension uses the handled data only to provide the user-requested conversation export and related local statistics. The developer does not sell, transfer, or use this data for advertising, credit decisions, or human review.
 
-## Changes to This Policy
+The extension's use of user data complies with the Chrome Web Store User Data Policy, including its Limited Use requirements.
 
-Any changes to this privacy policy will be posted in this repository. The effective date at the top of this document will be updated accordingly.
+## Security
 
-## Open Source
+Requests to the site and its media hosts use HTTPS. Export processing stays in the browser. The source code is available for inspection at [github.com/rohanbalkondekar/instagram-dm-extractor](https://github.com/rohanbalkondekar/instagram-dm-extractor).
 
-This Extension is open source and its complete source code is available for inspection at [github.com/rohanbalkondekar/instagram-dm-extractor](https://github.com/rohanbalkondekar/instagram-dm-extractor).
+## Changes and contact
 
-## Contact
-
-If you have questions or concerns about this privacy policy, please open an issue on the [GitHub repository](https://github.com/rohanbalkondekar/instagram-dm-extractor/issues).
+Policy changes will appear in this repository with a new effective date. Open a question or report at the [GitHub issue tracker](https://github.com/rohanbalkondekar/instagram-dm-extractor/issues).

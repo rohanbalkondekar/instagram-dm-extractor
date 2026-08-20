@@ -170,8 +170,8 @@
       return;
     }
 
-    // Skip tab.url check — Firefox doesn't provide tab.url with activeTab permission.
-    // Let the content script determine if we're on a DM page via CHECK_PAGE response.
+    // Avoid reading tab.url. Let the Instagram-scoped content script determine
+    // whether this is a DM page through its CHECK_PAGE response.
     activeTabId = tab.id;
 
     const resp = await sendToContent(tab, { type: 'CHECK_PAGE' });

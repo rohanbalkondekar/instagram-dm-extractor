@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "node tests/html-export-security.test.mjs",
+    "test": "node tests/html-export-security.test.mjs && node tests/release-compliance.test.mjs && node tests/package-determinism.test.mjs",
     "package": "node scripts/package.mjs"
   },
   "devDependencies": {

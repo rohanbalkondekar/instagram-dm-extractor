@@ -6,44 +6,35 @@ Instagram Chat Downloader & DM Export
 
 ## Summary
 
-Export your Instagram conversations privately. Files are created locally in your browser.
+Export one Instagram conversation to files created in your browser.
 
 ## Description
 
-Download your own Instagram chats and keep a copy on your computer.
+Save one DM conversation from your own account as PDF, plain text, HTML, CSV, JSON, or Markdown.
 
-Choose a date range, extract the conversation, then save it as:
+Choose a date range, extract the messages, and keep the result on your computer. The extension also reports local statistics, including messages per sender, date range, response time, and message types.
 
-- A styled HTML chat
-- PDF through the browser print dialog
-- Plain text
-- CSV for spreadsheets
-- JSON
-- Markdown for notes or AI tools
+Data handling:
 
-Use the extension for personal backups, archives, analysis, or moving conversations into tools you control.
-
-Private by design:
-
-- The extension runs in your browser.
-- It contacts Instagram through your existing signed-in session.
-- It does not upload chat data to the developer or another remote service.
-- The storage permission passes the extracted chat to a local export and print page. The extension removes that data after the page reads it.
+- The extension runs only on `https://www.instagram.com/*`.
+- It uses two first-party session cookies to request message data from the site's HTTPS API.
+- It processes messages, usernames, timestamps, reactions, links, and media URLs in your browser.
+- The PDF flow uses `chrome.storage.local` for one pending export. The print page removes that data after reading it.
+- The developer does not receive conversation data or analytics.
+- An opened HTML or PDF export can request message media from Meta hosts or Giphy.
+- The popup and exported HTML include an optional link to a related extension's Chrome Web Store page. It does not install anything or affect exports.
 
 How to use it:
 
-1. Open Instagram in Chrome and sign in.
-2. Open the DM conversation you want to save.
-3. Click the extension.
-4. Choose a date range and select Extract Messages.
-5. Pick PDF, Text, HTML, CSV, JSON, or Markdown.
+1. Sign in on the supported website and open a DM conversation.
+2. Select the extension icon.
+3. Choose a date range and select Extract Messages.
+4. Choose an export format.
 
-The extension also reports conversation stats. These include messages per sender, date range, response time, and message types.
+Source and privacy policy: https://github.com/rohanbalkondekar/instagram-dm-extractor
 
-The project is open source: https://github.com/rohanbalkondekar/instagram-dm-extractor
-
-Instagram Chat Downloader & DM Export is an independent extension. It is not affiliated with, endorsed by, or sponsored by Instagram or Meta.
+This independent extension is not affiliated with, endorsed by, or sponsored by Meta.
 
 ## What is new
 
-v2.4.1: Clarified the extension summary for Chrome Web Store policy compliance. Export features are unchanged.
+v2.4.2: Corrected data-handling disclosures, narrowed permissions, reduced listing repetition, and made release ZIPs reproducible. Export features are unchanged.
