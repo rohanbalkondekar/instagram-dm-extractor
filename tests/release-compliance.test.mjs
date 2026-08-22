@@ -11,6 +11,8 @@ const chromeListing = read('docs/chrome-web-store-listing.md');
 const firefoxListing = read('docs/firefox-amo-listing.md');
 const popup = read('extension/popup/popup.html');
 const exportTemplate = read('extension/template/chat_export.html');
+const promoTiles = read('screenshots/promo-tiles.html');
+const screenshotMockup = read('screenshots/mockup.html');
 
 assert.equal(manifest.manifest_version, 3);
 assert.equal(manifest.version, '2.4.2');
@@ -22,12 +24,13 @@ assert.equal(manifest.background.service_worker, 'background.js');
 
 const listingSummary = chromeListing.match(/## Summary\s+([^\n]+)/)?.[1];
 assert.equal(listingSummary, manifest.description, 'Chrome summary drifted from the manifest');
-assert.match(chromeListing, /PDF, plain text, HTML, CSV, JSON, or Markdown/);
-assert.equal(
-  (chromeListing.match(/PDF, plain text, HTML, CSV, JSON, or Markdown/g) || []).length,
-  1,
-  'format list must appear once'
-);
+const formatKeywords = ['PDF', 'TXT', 'plain text', 'HTML', 'CSV', 'JSON', 'Markdown'];
+for (const metadata of [chromeListing, promoTiles, screenshotMockup]) {
+  for (const line of metadata.split('\n')) {
+    const mentions = formatKeywords.filter((keyword) => line.includes(keyword));
+    assert.ok(mentions.length <= 2, `Chrome metadata enumerates formats: ${line}`);
+  }
+}
 assert.ok(
   (chromeListing.match(/\bInstagram\b/gi) || []).length <= 5,
   'Chrome listing repeats Instagram more than five times'

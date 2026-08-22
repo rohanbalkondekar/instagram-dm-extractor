@@ -10,7 +10,7 @@ Export one Instagram conversation to files created in your browser.
 
 ## Description
 
-Save one DM conversation from your own account as PDF, plain text, HTML, CSV, JSON, or Markdown.
+Save a copy of one DM conversation from your own account to your computer.
 
 Choose a date range, extract the messages, and keep the result on your computer. The extension also reports local statistics, including messages per sender, date range, response time, and message types.
 
@@ -37,4 +37,4 @@ This independent extension is not affiliated with, endorsed by, or sponsored by 
 
 ## What is new
 
-v2.4.2: Corrected data-handling disclosures, narrowed permissions, reduced listing repetition, and made release ZIPs reproducible. Export features are unchanged.
+v2.4.2: Corrected data-handling disclosures, narrowed permissions, and reduced listing repetition. Export features are unchanged.
