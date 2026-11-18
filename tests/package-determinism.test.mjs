@@ -6,8 +6,8 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const chromeZip = join(root, 'dist/instagram-dm-extractor-chrome-2.4.2.zip');
-const firefoxZip = join(root, 'dist/instagram-dm-extractor-firefox-2.4.2.zip');
+const chromeZip = join(root, 'dist/instagram-dm-extractor-chrome-2.4.3.zip');
+const firefoxZip = join(root, 'dist/instagram-dm-extractor-firefox-2.4.3.zip');
 
 function buildHashes() {
   execFileSync(process.execPath, ['scripts/package.mjs'], { cwd: root, stdio: 'pipe' });

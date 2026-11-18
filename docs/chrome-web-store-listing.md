@@ -37,4 +37,4 @@ This independent extension is not affiliated with, endorsed by, or sponsored by 
 
 ## What is new
 
-v2.4.2: Corrected data-handling disclosures, narrowed permissions, reduced listing repetition, and made release ZIPs reproducible. Export features are unchanged.
+v2.4.3: Exports work again. The site removed the endpoint the extension read conversations from, so it now reads them the way the website itself does.

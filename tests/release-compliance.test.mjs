@@ -13,7 +13,7 @@ const popup = read('extension/popup/popup.html');
 const exportTemplate = read('extension/template/chat_export.html');
 
 assert.equal(manifest.manifest_version, 3);
-assert.equal(manifest.version, '2.4.2');
+assert.equal(manifest.version, '2.4.3');
 assert.equal(manifest.name, 'Instagram Chat Downloader & DM Export');
 assert.equal(manifest.description, 'Export one Instagram conversation to files created in your browser.');
 assert.deepEqual(manifest.permissions, ['scripting', 'storage']);
