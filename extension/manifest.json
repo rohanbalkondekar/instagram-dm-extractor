@@ -10,7 +10,7 @@
       }
     }
   },
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "Export one Instagram conversation to files created in your browser.",
   "permissions": ["scripting", "storage"],
   "host_permissions": ["https://www.instagram.com/*"],

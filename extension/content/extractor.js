@@ -214,7 +214,7 @@ var ChatExtractor = (() => {
     } else {
       // XMA shares, stickers, notes, AI responses, reaction logs, etc.
       item.item_type = 'text';
-      const label = `[${n.content_type || kind || 'Contenido'}]`;
+      const label = `[${n.content_type || kind || 'Message'}]`;
       item.text = text ? `${label} ${text}` : (url ? `${label} ${url}` : label);
     }
 
